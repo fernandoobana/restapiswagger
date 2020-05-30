@@ -1,4 +1,5 @@
-# restapiswagger
+# Exemplo de rest api com swagger
+
 Testando o uso do swagger para documentar e, ao mesmo tempo, facilitar os testes de uma API.
 
 Api criada utilizando .Net Core 3.1.
