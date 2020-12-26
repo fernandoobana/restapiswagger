@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApi_Swagger</name>
+    </assembly>
+    <members>
+        <member name="T:WebApi_Swagger.Controllers.V1.ProductController">
+            <summary>
+            Versão 1 da controller Product
+            </summary>
+        </member>
+        <member name="M:WebApi_Swagger.Controllers.V1.ProductController.#ctor(Microsoft.Extensions.Logging.ILogger{WebApi_Swagger.Controllers.V1.ProductController})">
+             <summary>
+            
+             </summary>
+             <param name="logger"></param>
+        </member>
+        <member name="M:WebApi_Swagger.Controllers.V1.ProductController.Get">
+            <summary>
+            Método responsável por retornar todos os produtos
+            </summary>
+            <returns>Lista de produtos</returns>
+        </member>
+        <member name="T:WebApi_Swagger.Controllers.V2.ProductController">
+            <summary>
+            Versão 2 da controller Product
+            </summary>
+        </member>
+        <member name="M:WebApi_Swagger.Controllers.V2.ProductController.#ctor(Microsoft.Extensions.Logging.ILogger{WebApi_Swagger.Controllers.V2.ProductController})">
+             <summary>
+            
+             </summary>
+             <param name="logger"></param>
+        </member>
+        <member name="M:WebApi_Swagger.Controllers.V2.ProductController.Get">
+            <summary>
+            Método responsável por retornar todos os produtos
+            </summary>
+            <returns>Lista de produtos</returns>
+        </member>
+        <member name="T:WebApi_Swagger.Product">
+            <summary>
+            Entidade produto.
+            </summary>
+        </member>
+        <member name="P:WebApi_Swagger.Product.Id">
+            <summary>
+            ID do produto.
+            </summary>
+        </member>
+        <member name="P:WebApi_Swagger.Product.Price">
+            <summary>
+            Valor do custo de venda do produto.
+            </summary>
+        </member>
+        <member name="P:WebApi_Swagger.Product.Description">
+            <summary>
+            Descrição do produto.
+            </summary>
+        </member>
+    </members>
+</doc>

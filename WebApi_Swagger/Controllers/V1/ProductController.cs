@@ -5,16 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace WebApi_Swagger.Controllers
+namespace WebApi_Swagger.Controllers.V1
 {
+    /// <summary>
+    /// Versão 1 da controller Product
+    /// </summary>
     [ApiController]
-    [Route("v1/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ProductController : ControllerBase
     {
         private List<Product> _listProducts = null;
 
         private readonly ILogger<ProductController> _logger;
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="logger"></param>
         public ProductController(ILogger<ProductController> logger)
         {
             _logger = logger;
@@ -24,6 +32,10 @@ namespace WebApi_Swagger.Controllers
             );
         }
 
+        /// <summary>
+        /// Método responsável por retornar todos os produtos
+        /// </summary>
+        /// <returns>Lista de produtos</returns>
         [HttpGet]
         public IEnumerable<Product> Get()
         {
