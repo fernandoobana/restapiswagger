@@ -9,11 +9,12 @@
             Versão 1 da controller Product
             </summary>
         </member>
-        <member name="M:WebApi_Swagger.Controllers.V1.ProductController.#ctor(Microsoft.Extensions.Logging.ILogger{WebApi_Swagger.Controllers.V1.ProductController})">
+        <member name="M:WebApi_Swagger.Controllers.V1.ProductController.#ctor(Microsoft.Extensions.Logging.ILogger{WebApi_Swagger.Controllers.V1.ProductController},WebApi_Swagger.Data.DataContext)">
              <summary>
             
              </summary>
              <param name="logger"></param>
+             <param name="dataContext"></param>
         </member>
         <member name="M:WebApi_Swagger.Controllers.V1.ProductController.Get">
             <summary>

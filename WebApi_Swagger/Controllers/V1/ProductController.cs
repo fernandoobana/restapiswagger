@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using WebApi_Swagger.Data;
 
 namespace WebApi_Swagger.Controllers.V1
 {
@@ -15,21 +14,18 @@ namespace WebApi_Swagger.Controllers.V1
     [Route("api/v{version:apiVersion}/[controller]")]
     public class ProductController : ControllerBase
     {
-        private List<Product> _listProducts = null;
-
         private readonly ILogger<ProductController> _logger;
+        private readonly DataContext _dataContext;
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="logger"></param>
-        public ProductController(ILogger<ProductController> logger)
+        /// <param name="dataContext"></param>
+        public ProductController(ILogger<ProductController> logger, DataContext dataContext)
         {
             _logger = logger;
-            _listProducts = new List<Product>();
-            _listProducts.Add(
-                new Product { Id = 1, Price = 25.90M, Description = "Produto 1" }
-            );
+            _dataContext = dataContext;
         }
 
         /// <summary>
@@ -39,13 +35,16 @@ namespace WebApi_Swagger.Controllers.V1
         [HttpGet]
         public IEnumerable<Product> Get()
         {
-            return _listProducts.ToArray();
+            return _dataContext.Products.ToList();
         }
 
         [HttpPost]
-        public void Post([FromBody]Product product)
+        public IActionResult Post([FromBody] Product product)
         {
-            _listProducts.Add(product);
+            _dataContext.Products.Add(product);
+            _dataContext.SaveChanges();
+
+            return Ok(product);
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
@@ -53,7 +52,7 @@ namespace WebApi_Swagger.Controllers.V1
         [Route("getById")]
         public IActionResult GetById(int id)
         {
-            var prod = _listProducts.Where(p => p.Id == id);
+            var prod = _dataContext.Products.Where(p => p.Id == id);
             if (prod != null && prod.Count() > 0)
             {
                 return Ok(prod);
