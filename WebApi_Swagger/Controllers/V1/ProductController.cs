@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebApi_Swagger.Data;
+using WebApi_Swagger.Helpers;
 
 namespace WebApi_Swagger.Controllers.V1
 {
@@ -33,9 +36,13 @@ namespace WebApi_Swagger.Controllers.V1
         /// </summary>
         /// <returns>Lista de produtos</returns>
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public async Task<IActionResult> Get([FromQuery] PageParams pageParams)
         {
-            return _dataContext.Products.ToList();
+            var products = await GetProducts(pageParams);
+
+            Response.AddPagination(products.CurrentPage, products.PageSize, products.TotalCount, products.TotalPages);
+
+            return Ok(products);
         }
 
         [HttpPost]
@@ -59,6 +66,20 @@ namespace WebApi_Swagger.Controllers.V1
             }
 
             return NotFound();
+        }
+
+        private async Task<PageList<Product>> GetProducts(PageParams pageParams)
+        {
+            IQueryable<Product> query = _dataContext.Products;
+
+            if (pageParams.IdFilter > 0)
+            {
+                query = query.Where(x => x.Id == pageParams.IdFilter);
+            }
+
+            query = query.AsNoTracking().OrderBy(x => x.Id);
+
+            return await PageList<Product>.CreateAsync(query, pageParams.PageNumber, pageParams.PageSize);
         }
     }
 }

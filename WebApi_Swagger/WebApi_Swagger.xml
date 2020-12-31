@@ -16,7 +16,7 @@
              <param name="logger"></param>
              <param name="dataContext"></param>
         </member>
-        <member name="M:WebApi_Swagger.Controllers.V1.ProductController.Get">
+        <member name="M:WebApi_Swagger.Controllers.V1.ProductController.Get(WebApi_Swagger.Helpers.PageParams)">
             <summary>
             Método responsável por retornar todos os produtos
             </summary>
